@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {# {{ parent() }} #}
+    <link href="/assets/css/login.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <section class="login">
+        <div class="login-left">
+            <img src="../assets/images/login-img.jpg">
+        </div>
+        <div class="login-right">
+            <div class="form">
+                <h2>Artiste PlaceAuPro</h2>
+                <p class="text-muted">Content de te revoir ! Connecte-toi à ton compte.</p>
+
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <div class="form__group field">
+                        <input type="email" placeholder="Email" value="{{ last_username }}" name="email" id="inputEmail" class="form__field" autocomplete="email" required autofocus>
+                        <label for="inputEmail" class="form__label">Email</label>
+                    </div>
+
+                    <div class="form__group field">
+                        <input type="password" name="password" id="inputPassword" class="form__field" placeholder="password" autocomplete="current-password" required>
+                        <label for="inputPassword" class="form__label">Mot de passe</label>
+                    </div>
+                    <div class="form__under checkbox mb-3">
+                        <label>
+                            <input type="checkbox" id="remember" name="_remember_me" onclick="toggleCheckbox('remember')" style="cursor: pointer"> Se souvenir de moi
+                        </label>
+                        <a href="../forgot"><p class="text-aside">Mot de passe oublié ?</p></a>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="button btn-red form__btn" type="submit">
+                        Se connecter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+        function toggleCheckbox(id) {
+            document.getElementById(id).checked = !document.getElementById(id).checked;
+        }
+    </script>
+
+{% endblock %}

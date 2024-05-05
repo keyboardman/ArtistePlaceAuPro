@@ -1,0 +1,95 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {# {{ parent() }} #}
+    <link href="/assets/css/profile.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+    <section class="header-content">
+        <div class="profile-header" style="background-image: url('/assets/images/bg1.jpg');">
+            <div class="profile-img">
+                <img src="/assets/images/avatar-user/avatar-{{ artiste }}.png" width="200" alt="Profile Image">
+            </div>
+            <div class="profile-nav-info">
+                <h3 class="user-name">{{ artiste }}</h3>
+            </div>
+        </div>
+
+        <div class="main-bd">
+            <div class="left-side">
+                <div class="profile-side">
+                    <div class="user-bio">
+                        <h3>Bio :</h3>
+                        <p class="bio" id="bio">
+                            Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
+                        </p>
+                        <form method="post" action="#" id="myform">
+                            <textarea name="bio">Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!</textarea>
+                        </form>
+                    </div>
+                    <?php if ($data['profiles_name']['username'] === $_SESSION['data']['user_info']['username']): ?>
+                    <div class="profile-btn">
+                        <button onclick="document.getElementById('myform').submit();" id="valid-btn" class="chatbtn valid-btn"><i class="fas fa-edit"></i> Valider</button>
+                        <button onclick="toggleModify()" class="chatbtn" id="chatBtn"><i class="fas fa-edit"></i> Modifier</button>
+                    </div>
+                    <?php endif; ?>
+                    <span class="no-of-user-rate">Score :</span>
+                    <div class="user-rating">
+                        <h3 class="rating">4.5</h3>
+                        <div class="rate">
+                            <span class="no-of-user-rate"><span>3</span>&nbsp;&nbsp;BD Lue</span>
+                            <br>
+                            <span class="no-of-user-rate"><span>3</span>&nbsp;&nbsp;BD Post</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h1>Créations :</h1>
+            <div class="list-views" id="listviews">
+                <ul>
+                    <li>
+                        <a href="animename.php">
+                            <div class="body_news-anime-item-box">
+                                <img src="/assets/images/News-anime.jpg" />
+                                <div>
+                                    <h2 class="title-vignette">Blanche Neige</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <hr class="hr">
+                    <li>
+                        <a href="animename.php">
+                            <div class="body_news-anime-item-box">
+                                <img src="/assets/images/News-anime.jpg" />
+                                <div>
+                                    <h2 class="title-vignette">Blanche Neige</h2>
+                                    <div class="star-container">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <hr class="hr">
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        /* Toggle Modify */
+        function toggleModify(){
+            document.querySelector("#myform").style.display = "block";
+            document.querySelector("#valid-btn").style.display = "block";
+            document.querySelector("#bio").style.display = "none";
+            document.querySelector("#chatBtn").style.display = "none";
+        }
+        /* Toggle Modify */
+    </script>
+
+{% endblock %}

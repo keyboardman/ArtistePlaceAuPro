@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/eb906b2aec.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link type="text/css" rel="stylesheet" href="/assets/css/main.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/settings.css">
+
+    <title>Paramètres - ArtistePlaceAuPro.fr</title>
+</head>
+<body>
+<header>
+    <a href="./">
+        <img src="/assets/images/Pikari_logo_dark-gray.png">
+    </a>
+    <img src="/assets/images/avatar-user/avatar-{{ app.user.username }}.png">
+</header>
+    <main>
+        <aside>
+            <div>
+                <img src="/assets/images/avatar-user/avatar-{{ app.user.username }}.png">
+                <div>
+                    <h6><?= $_SESSION['data']['user_info']['username'] ?></h6>
+                    <p>Développeur Web</p>
+                </div>
+            </div>
+            <div>
+                <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 38 30.401"><defs><style>.a{fill:#8a8f9c;}</style></defs><path class="a" d="M21.31,25.728l-.4,3.622a.945.945,0,0,0,1.045,1.045l3.616-.4L33.755,21.8,29.5,17.546Zm16.275-9.761-2.25-2.25a1.423,1.423,0,0,0-2.007,0L30.846,16.2l4.263,4.257,2.482-2.482a1.428,1.428,0,0,0-.006-2.007ZM13.294,17.1A8.547,8.547,0,0,0,21.85,8.544,8.643,8.643,0,0,0,13.306,0,8.547,8.547,0,0,0,4.75,8.556,8.643,8.643,0,0,0,13.294,17.1ZM13.033,2.856A5.7,5.7,0,1,1,7.606,8.283a5.7,5.7,0,0,1,5.427-5.427ZM7.98,20.9c.867,0,2.274.95,5.32.95,3.07,0,4.447-.95,5.32-.95a5.084,5.084,0,0,1,2.7.79l2.043-2.043a7.9,7.9,0,0,0-4.744-1.6c-1.7,0-2.523.95-5.32.95s-3.61-.95-5.32-.95A7.982,7.982,0,0,0,0,26.03v1.52A2.851,2.851,0,0,0,2.85,30.4H18.187a6.644,6.644,0,0,1,.053-2.85H2.85V26.03A5.139,5.139,0,0,1,7.98,20.9Z" transform="translate(0 0)"/></svg>
+                    <h2>Paramètres du compte</h2>
+                </a>
+            </div>
+            <div>
+                <h2>SUPPORT</h2>
+                <div>
+                    <div>
+                        <a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M16,24a8,8,0,1,0-8-8A8,8,0,0,0,16,24Zm-3.335-2.475L14.388,19.8a4.14,4.14,0,0,0,3.225,0l1.723,1.723a6.464,6.464,0,0,1-6.671,0ZM18.581,16A2.581,2.581,0,1,1,16,13.419,2.584,2.584,0,0,1,18.581,16Zm2.945,3.335L19.8,17.612a4.14,4.14,0,0,0,0-3.225l1.723-1.723A6.464,6.464,0,0,1,21.525,19.335Zm-2.19-8.861L17.612,12.2a4.14,4.14,0,0,0-3.225,0l-1.723-1.723A6.464,6.464,0,0,1,19.335,10.475Zm-8.861,2.19L12.2,14.388a4.14,4.14,0,0,0,0,3.225l-1.723,1.723A6.464,6.464,0,0,1,10.475,12.665Z" transform="translate(-8 -8)"/></svg>
+                            <h2>Contactez-nous</h2>
+                        </a>
+                    </div>
+                    <div>
+                        <a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M12.5,32H1.5A1.5,1.5,0,0,0,0,33.5v11A1.5,1.5,0,0,0,1.5,46h11A1.5,1.5,0,0,0,14,44.5v-11A1.5,1.5,0,0,0,12.5,32Zm-.187,12.5H1.688a.187.187,0,0,1-.187-.187V33.688a.187.187,0,0,1,.187-.187H12.313a.187.187,0,0,1,.188.188V44.313a.187.187,0,0,1-.187.188ZM10.625,35l-4.25,0A.375.375,0,0,0,6,35.38v.867a.375.375,0,0,0,.383.375L8.2,36.555,3.11,41.64a.375.375,0,0,0,0,.53l.72.72a.375.375,0,0,0,.53,0L9.445,37.8l-.067,1.813A.375.375,0,0,0,9.753,40h.867A.375.375,0,0,0,11,39.625l0-4.25A.375.375,0,0,0,10.625,35Z" transform="translate(0 -32)"/></svg>
+                            <h2>FAQ</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <section>
+            <h1>Compte</h1>
+            <div>
+                <div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 38 30.401"><defs><style>.a{fill:#8a8f9c;}</style></defs><path class="a" d="M21.31,25.728l-.4,3.622a.945.945,0,0,0,1.045,1.045l3.616-.4L33.755,21.8,29.5,17.546Zm16.275-9.761-2.25-2.25a1.423,1.423,0,0,0-2.007,0L30.846,16.2l4.263,4.257,2.482-2.482a1.428,1.428,0,0,0-.006-2.007ZM13.294,17.1A8.547,8.547,0,0,0,21.85,8.544,8.643,8.643,0,0,0,13.306,0,8.547,8.547,0,0,0,4.75,8.556,8.643,8.643,0,0,0,13.294,17.1ZM13.033,2.856A5.7,5.7,0,1,1,7.606,8.283a5.7,5.7,0,0,1,5.427-5.427ZM7.98,20.9c.867,0,2.274.95,5.32.95,3.07,0,4.447-.95,5.32-.95a5.084,5.084,0,0,1,2.7.79l2.043-2.043a7.9,7.9,0,0,0-4.744-1.6c-1.7,0-2.523.95-5.32.95s-3.61-.95-5.32-.95A7.982,7.982,0,0,0,0,26.03v1.52A2.851,2.851,0,0,0,2.85,30.4H18.187a6.644,6.644,0,0,1,.053-2.85H2.85V26.03A5.139,5.139,0,0,1,7.98,20.9Z" transform="translate(0 0)"/></svg>
+                    </div>
+                    <div>
+                        <h3><?= $_SESSION['data']['user_info']['username'] ?></h3>
+                        <p>Veuillez vous assurer que ces informations sont à jour ce qui améliore notre communications avec vous.</p>
+                    </div>
+                </div>
+                <div>
+                    <form>
+                        <div>
+                            <div>
+                                <label for="pseudo">Votre Pseudo</label>
+                                <input type="text" name="Pseudo" id="pseudo" placeholder="Retr0">
+                            </div>
+                            <div>
+                                <label for="Mail">Adresse Email</label>
+                                <input type="email" name="Mail" id="Mail" placeholder="Retr0x@dcc.com">
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="discord">Votre Pseudo Discord</label>
+                                <input type="text" name="discord" id="discord" placeholder="Retr0#6088">
+                            </div>
+                            <div>
+                                <label for="discord">Photo De Profile</label>
+                                <input type="file" name="discord" id="discord" placeholder="Retr0#6088">
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <div style="position: relative;">
+                                <label for="ActualPassword">Mot de passe actuel</label>
+                                <a href="../forgot">oublié?</a>
+                                <input type="password" name="Pseudo" id="ActualPassword" placeholder="******">
+                            </div>
+                            <div>
+                                <label for="Password">Nouveau mot de passe</label>
+                                <input type="text" name="Mail" id="Password" placeholder="Nouveau mot de passe">
+                            </div>
+                        </div>
+                        <input type="submit" value="Mettre à jour">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>

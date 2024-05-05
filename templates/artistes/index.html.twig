@@ -1,0 +1,322 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {# {{ parent() }} #}
+    <link href="/assets/css/artistes.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Artistes{% endblock %}
+
+{% block content %}
+    {% for artiste in artistes %}
+        {{ dump(artiste.getUsername()) }}
+    {% endfor %}
+    <main>
+        <section>
+            <div class="hero-container">
+                <h1>Anime</h1>
+                <img src="../assets/images/bg1.jpg">
+            </div>
+
+            <div class="body_news">
+                <div>
+                    <h1 class="body_news-anime-title">News : Anime</h1>
+                    <div>
+                        <ul class="body_news-anime-items">
+                            <li class="body_news-anime-item">
+                                <a href="animename.php">
+                                    <div class="body_news-anime-item-box">
+                                        <img src="../assets/images/News-anime.jpg" />
+                                        <h2>Nanatsu no Taizai S04 VF</h2>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="body_news-anime-item">
+                                <a href="animename.php">
+                                    <div class="body_news-anime-item-box">
+                                        <img src="../assets/images/News-anime.jpg" />
+                                        <h2>Nanatsu no Taizai S04 VF</h2>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="body_news-anime-item">
+                                <a href="animename.php">
+                                    <div class="body_news-anime-item-box">
+                                        <img src="../assets/images/News-anime.jpg" />
+                                        <h2>Nanatsu no Taizai S04 VF</h2>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="body_news-anime-item">
+                                <a href="animename.php">
+                                    <div class="body_news-anime-item-box">
+                                        <img src="../assets/images/News-anime.jpg" />
+                                        <h2>Nanatsu no Taizai S04 VF</h2>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h1 class="title-anime">Anime</h1>
+                <div class="tri-manager">
+                    <form method="get" action="">
+                        <select name="Type">
+                            <option value="" selected disabled>Type</option>
+                            <option value="Science-Fiction & Fantastique">Science-Fiction & Fantastique</option>
+                            <option value="Action & Adventure">Action & Adventure</option>
+                            <option value="Comédie">Comédie</option>
+                            <option value="Drame">Drame</option>
+                            <option value="Mystère">Mystère</option>
+                        </select>
+
+                        <select name="Tri">
+                            <option value="" selected disabled>Tri</option>
+                            <option value="Note - Croissant">Note - Croissant</option>
+                            <option value="Note - Décroissant">Note - Décroissant</option>
+                            <option value="Diffusion - Croissant">Diffusion - Croissant</option>
+                            <option value="Diffusion - Décroissant">Diffusion - Décroissant</option>
+                        </select>
+                    </form>
+                    <div class="views-option">
+                        <a onclick="togglelist()">
+                            <i class="fas fa-3x fa-list"></i>
+                        </a>
+                        <a onclick="toggleth()">
+                            <i class="fas fa-3x fa-th"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="block-views" id="thviews">
+                    <ul class="body_news-anime-items">
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="body_news-anime-item">
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <h2>Nanatsu no Taizai S04 VF</h2>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-views" id="listviews" style="display: none;">
+                    <ul>
+                        <li>
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <div>
+                                        <h2 class="title-vignette">Nanatsu no Taizai S04 VF</h2>
+                                        <p>Les "Seven Deadly Sins" sont un groupe de chevaliers qui ont conspiré pour renverser le royaume de Britannia.
+                                            Ils ont été éradiqués par les Chevaliers Sacrés, cependant certaines rumeurs laissent prétendre
+                                            qu'ils sont toujours en vie. Dix ans plus tard, les Chevaliers Sacrés ont fait un coup d'état,
+                                            emprisonnant le Roi pour devenir les nouveaux dirigeants tyranniques du Royaume.
+                                        </p>
+                                        <button class="btn">Genre</button>
+                                        <div class="star-container">
+                                            <ul class="star-list">
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <hr class="hr">
+                        <li>
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <div>
+                                        <h2 class="title-vignette">Nanatsu no Taizai S04 VF</h2>
+                                        <p>Les "Seven Deadly Sins" sont un groupe de chevaliers qui ont conspiré pour renverser le royaume de Britannia.
+                                            Ils ont été éradiqués par les Chevaliers Sacrés, cependant certaines rumeurs laissent prétendre
+                                            qu'ils sont toujours en vie. Dix ans plus tard, les Chevaliers Sacrés ont fait un coup d'état,
+                                            emprisonnant le Roi pour devenir les nouveaux dirigeants tyranniques du Royaume.
+                                        </p>
+                                        <button class="btn">Genre</button>
+                                        <div class="star-container">
+                                            <ul class="star-list">
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <hr class="hr">
+                        <li>
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <div>
+                                        <h2 class="title-vignette">Nanatsu no Taizai S04 VF</h2>
+                                        <p>Les "Seven Deadly Sins" sont un groupe de chevaliers qui ont conspiré pour renverser le royaume de Britannia.
+                                            Ils ont été éradiqués par les Chevaliers Sacrés, cependant certaines rumeurs laissent prétendre
+                                            qu'ils sont toujours en vie. Dix ans plus tard, les Chevaliers Sacrés ont fait un coup d'état,
+                                            emprisonnant le Roi pour devenir les nouveaux dirigeants tyranniques du Royaume.
+                                        </p>
+                                        <button class="btn">Genre</button>
+                                        <div class="star-container">
+                                            <ul class="star-list">
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <hr class="hr">
+                        <li>
+                            <a href="animename.php">
+                                <div class="body_news-anime-item-box">
+                                    <img src="../assets/images/News-anime.jpg" />
+                                    <div>
+                                        <h2 class="title-vignette">Nanatsu no Taizai S04 VF</h2>
+                                        <p>Les "Seven Deadly Sins" sont un groupe de chevaliers qui ont conspiré pour renverser le royaume de Britannia.
+                                            Ils ont été éradiqués par les Chevaliers Sacrés, cependant certaines rumeurs laissent prétendre
+                                            qu'ils sont toujours en vie. Dix ans plus tard, les Chevaliers Sacrés ont fait un coup d'état,
+                                            emprisonnant le Roi pour devenir les nouveaux dirigeants tyranniques du Royaume.
+                                        </p>
+                                        <button class="btn">Genre</button>
+                                        <div class="star-container">
+                                            <ul class="star-list">
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star on"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                                <li><i class="fas fa-3x fa-star off"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="data-pagination">
+                    <a href=# disabled><i class="fas fa-chevron-left"></i></a>
+                    <ul>
+                        <li class=current><a href=#1>1</a>
+                        <li><a href=#2>2</a>
+                        <li><a href=#3>3</a>
+                        <li><a href=#4>4</a>
+                        <li><a href=#5>5</a>
+                        <li><a href=#6>6</a>
+                        <li><a href=#7>7</a>
+                        <li><a href=#8>8</a>
+                        <li><a href=#9>9</a>
+                        <li><a href=#10>…</a>
+                        <li><a href=#15>15</a>
+                    </ul>
+                    <a href=#2><i class="fas fa-chevron-right"></i></a>
+                </div>
+
+            </div>
+    </main>
+
+{% endblock %}
