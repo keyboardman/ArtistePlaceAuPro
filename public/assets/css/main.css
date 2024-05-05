@@ -1,0 +1,69 @@
+
+@font-face {
+  font-family: Milkshake;
+  src: url("font/Milkshake.otf");
+}
+
+@font-face {
+  font-family: Christmas Bell;
+  src: url("font/Christmas Bell - Personal Use.otf");
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url("font/Gilroy-Medium.otf");
+}
+
+@font-face {
+  font-family: AdobeCleanUX;
+  src: url("font/AdobeCleanUXBold.woff") format("woff"), url("font/AdobeCleanUXLight.woff") format("woff"), url("font/AdobeCleanUXMedium.woff") format("woff"), url("font/AdobeCleanUXRegular.woff") format("woff"), url("font/AdobeCleanUXSemiLight.woff") format("woff");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: AdobeCleanUX;
+  vertical-align: baseline;
+  list-style: none;
+  color: var(--text-color);
+  text-decoration: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color */
+  --bg-color: #161616;
+  --bg-gray-color: #979797;
+  --text-color: #e0e0e0;
+  --gray: #8d8d8d;
+  --brand-color: #fff;
+  --white: #fff;
+  /* Color */
+}
+
+[data-theme="light-theme"] {
+  --bg-color: #cfd8dc;
+  --text-color: #212121;
+  --brand-color: #fff;
+}
+
+body {
+  background-color: var(--bg-color) !important;
+  -webkit-transition: color 1s;
+  -o-transition: color 1s;
+  transition: color 1s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+a {
+  cursor: pointer;
+}
+
