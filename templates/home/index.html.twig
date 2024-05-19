@@ -1,99 +1,49 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-     {# {{ parent() }} #}
     <link href="/assets/css/home.css" rel="stylesheet">
 {% endblock %}
 
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-
     <section id="heroHeader">
-        <img src="/assets/images/Hero_banner.jpg">
+        <img src="/assets/images/Hero_banner.jpg" alt="Hero Banner">
     </section>
 
     <main>
         <section class="Encours">
             <h3>Artiste du moment</h3>
-            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-
-                    <div class="carousel-item">
-                        <div class="card-wrapper container-sm d-flex justify-content-around">
-                            {% for i in 1..4 %}
-                                <div class="card  " style="width: 18rem;">
-                                    <img src="/assets/images/artiste{{ i }}.webp" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Test name</h5>
-                                    </div>
-                                </div>
-                            {% endfor %}
+            <div class="container-fluid">
+                <div class="row">
+                    {% for i in 1..5 %}
+                        <div class="col">
+                            <div class="profile-card"><img src="/assets/images/artiste1.webp" alt="Artiste Image">
+                                <div class="profile-name">JOHN DOE</div>
+                                <div class="profile-username">@johndoesurname</div>
+                                <a href="/profile/test" class="stretched-link"></a>
+                            </div>
                         </div>
-                    </div>
-
-
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <ul class="slider">
-                    {% for i in 1..4 %}
-                        <a href="../profile/Retr0">
-                            <img class="anime-vignette zoom" src="/assets/images/artiste{{ i }}.webp" />
-                        </a>
-                        </li>
-
                     {% endfor %}
-                </ul>
+                </div>
+            </div>
         </section>
 
         <section class="Encours">
             <h3>Dernière Créations</h3>
-            <ul class="slider">
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-                <li class="anime-item">
-                    <a href="../profile/Retr0">
-                        <img class="anime-vignette zoom" src="/assets/images/News-anime.jpg" />
-                    </a>
-                </li>
-            </ul>
+            <div class="container-fluid">
+                <div class="row">
+                    {% for i in 1..5 %}
+                        <div class="col">
+                            <div class="profile-card"><img src="/assets/images/News-anime.jpg" alt="Création Image">
+                                <div class="profile-name">JOHN DOE</div>
+                                <div class="profile-username">@johndoesurname</div>
+                                <a href="/profile/test" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </section>
-
     </main>
-
 {% endblock %}

@@ -1,0 +1,65 @@
+<header id="header">
+    <nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark" style="background-color: #2D2D2D; opacity: 1 !important;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="..." alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                ArtistePlaceAuPro
+            </a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav align-items-center ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/bd">BD</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/creations">Créations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/artistes">Artistes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/apropos">A propos</a>
+                    </li>
+                </ul>
+                {{ form_start(form) }}
+                {{ form_widget(form.search) }}
+                {{ form_rest(form) }}
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                {{ form_end(form) }}
+                <!--<form class="d-flex ms-auto mb-2 mb-lg-0" role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>-->
+                <div class="last-child-nav ms-auto mb-2 mb-lg-0">
+                    <a>
+                        <i class="fas fa-2x fa-bookmark"></i>
+                    </a>
+                    <a>
+                        <span class="notification-bell"></span>
+                        <i class="fas fa-2x fa-bell"></i>
+                    </a>
+                    {% if app.user %}
+                        <label for="profile2" class="profile-dropdown">
+                            <div id="profile-avatar" style="background:url(/assets/images/avatar-user/avatar-{{ app.user.username }}.png) center no-repeat;"></div>
+                            <input type="checkbox" id="profile2">
+                            <ul class="profile-dropdown-item">
+                                <li><a href="/profile/{{ app.user.username }}"><p>{{ app.user.username }}</p></a></li>
+                                {% if 'ROLE_USER' in app.user.roles %}
+                                    <li><a href="http://adminArtiste/login"><p>Espace Administrateur</p></a></li>
+                                {% endif %}
+                                <li><a href="/settings"><p>Paramètres</p></a></li>
+                                <li><a href="/logout"><p>Se déconnecter</p></a></li>
+                            </ul>
+                        </label>
+                    {% else %}
+                        <a class="header_navbar_sign-in" href="/login">
+                            <i class="fas fa-2x fa-sign-in-alt"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
