@@ -17,10 +17,8 @@ use App\Entity\User;
 )]
 class AddUserCommand extends Command
 {
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly  EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
-
         parent::__construct();
     }
 
