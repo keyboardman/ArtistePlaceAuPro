@@ -3,11 +3,41 @@
 {% block stylesheets %}
     {# {{ parent() }} #}
     <link href="/assets/css/profile.css" rel="stylesheet">
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>>
 {% endblock %}
 
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+    <style>
+        /* ---- grid ---- */
+
+        .grid {
+            position: relative;
+        }
+
+        /* clear fix */
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* ---- .grid-item ---- */
+
+        .grid-item {
+            width: 33.333%;
+        }
+
+        .grid-item {
+            float: left;
+        }
+
+        .grid-item img {
+            display: block;
+            max-width: 100%;
+        }
+    </style>
 
     <section class="header-content">
         <div class="profile-header" style="background-image: url('/assets/images/bg1.jpg');">
@@ -31,56 +61,104 @@
                             <textarea name="bio">Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!</textarea>
                         </form>
                     </div>
-                    <?php if ($data['profiles_name']['username'] === $_SESSION['data']['user_info']['username']): ?>
+                    {% if app.user == artiste %}
                     <div class="profile-btn">
                         <button onclick="document.getElementById('myform').submit();" id="valid-btn" class="chatbtn valid-btn"><i class="fas fa-edit"></i> Valider</button>
                         <button onclick="toggleModify()" class="chatbtn" id="chatBtn"><i class="fas fa-edit"></i> Modifier</button>
                     </div>
-                    <?php endif; ?>
-                    <span class="no-of-user-rate">Score :</span>
-                    <div class="user-rating">
-                        <h3 class="rating">4.5</h3>
-                        <div class="rate">
-                            <span class="no-of-user-rate"><span>3</span>&nbsp;&nbsp;BD Lue</span>
-                            <br>
-                            <span class="no-of-user-rate"><span>3</span>&nbsp;&nbsp;BD Post</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if app.user == artiste %}
+            <div class="bg-white rounded-lg shadow p-3 mb-4" style="margin-left: 20.5%;margin-right: 1.5%;background-color: #CECECE !important;">
+            <div class="d-flex w-100">
+                <div class="flex-shrink-0 me-3">
+                    <div class="cursor-pointer font-bold w-12 h-12 bg-secondary d-flex align-items-center justify-content-center rounded-circle">
+                        <img src="/assets/images/avatar-user/avatar-{{ artiste }}.png" width="70" alt="Profile Image">
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <textarea x-model="tweetText" class="mb-2 bg-light form-control border-0 rounded-lg py-2 px-3" rows="3" placeholder="Soumettre un post"></textarea>
+
+                    <div class="position-relative w-auto mb-2 border rounded-lg bg-light shadow-sm overflow-hidden" style="display: none;">
+                        <div class="gg-container">
+                            <div class="gg-box square-gallery m-0">
+                                <template x-for="image in images">
+                                    <img class="img-fluid w-100">
+                                </template>
+                            </div>
+                        </div>
+                        <div class="shadow cursor-pointer position-absolute top-0 end-0 p-2 me-2 mt-2 rounded-circle bg-secondary">
+                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <input multiple name="photo" id="fileInput" accept="image/*" class="d-none" type="file">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <label for="fileInput" class="btn btn-light p-2 rounded-circle text-secondary">
+                                <i class="far fa-images"></i>
+                            </label>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary" disabled="disabled">Tweet</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div>
+        {% endif %}
+
+        <div id="gallery">
             <h1>Créations :</h1>
-            <div class="list-views" id="listviews">
-                <ul>
-                    <li>
-                        <a href="animename.php">
-                            <div class="body_news-anime-item-box">
-                                <img src="/assets/images/News-anime.jpg" />
-                                <div>
-                                    <h2 class="title-vignette">Blanche Neige</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <hr class="hr">
-                    <li>
-                        <a href="animename.php">
-                            <div class="body_news-anime-item-box">
-                                <img src="/assets/images/News-anime.jpg" />
-                                <div>
-                                    <h2 class="title-vignette">Blanche Neige</h2>
-                                    <div class="star-container">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <hr class="hr">
-                </ul>
+            <div class="grid">
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/submerged.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/look-out.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/cat-nose.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/contrail.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/golden-hour.jpg" />
+                </div>
+                <div class="grid-item">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/flight-formation.jpg" />
+                </div>
             </div>
+
         </div>
     </section>
+    <script type="module">
+        var $grid = $('.grid').packery({
+            itemSelector: '.grid-item',
+            percentPosition: true
+        });
+        // layout Packery after each image loads
+        $grid.imagesLoaded().progress( function() {
+            $grid.packery();
+        });
+    </script>
+
     <script type="text/javascript">
         /* Toggle Modify */
         function toggleModify(){
@@ -90,6 +168,7 @@
             document.querySelector("#chatBtn").style.display = "none";
         }
         /* Toggle Modify */
+    </script>
     </script>
 
 {% endblock %}
