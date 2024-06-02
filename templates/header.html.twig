@@ -39,14 +39,14 @@
                 <div class="last-child-nav ms-auto mb-lg-0 my-auto me-5">
                     {% if app.user %}
                         <label for="profile2" class="profile-dropdown">
-                            <div id="profile-avatar" style="background:url(/assets/images/avatar-user/avatar-{{ app.user.username }}.png) center no-repeat;"></div>
+                            <div id="profile-avatar" style="background:url('/assets/images/avatar-user/avatar-{{ app.user.username }}.png') center no-repeat;"></div>
                             <input type="checkbox" id="profile2">
                             <ul class="profile-dropdown-item ps-0">
                                 <li><a href="/profile/{{ app.user.username }}"><p>{{ app.user.username }}</p></a></li>
                                 {% if 'ROLE_USER' in app.user.roles %}
                                     <li><a href="http://adminArtiste/login"><p>Espace Administrateur</p></a></li>
                                 {% endif %}
-                                <li><a href="/settings"><p>Paramètres</p></a></li>
+                                <li><a href="/user/settings"><p>Paramètres</p></a></li>
                                 <li><a href="/logout"><p>Se déconnecter</p></a></li>
                             </ul>
                         </label>
