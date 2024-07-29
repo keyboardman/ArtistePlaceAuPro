@@ -1,0 +1,161 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Bienvenue!{% endblock %}
+
+{% block body %}
+    <body class="g-sidenav-show bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <main class="main-content position-relative border-radius-lg" style="padding-left: 17%;">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+                    </ol>
+                    <h6 class="font-weight-bolder text-white mb-0">
+                        Dashboard
+                    </h6>
+                </nav>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        {# templates/base.html.twig (ou un autre template approprié) #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <div class="card-header pb-0">
+                            <h6>Crée un utilisateur</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    {{ form_start(form) }}
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.firstname) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.lastname) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.username) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.email) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.telephone) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.file) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.plainPassword.first) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.plainPassword.second) }}
+                                            </td>
+                                            <td>
+                                                <input type="submit" class="btn btn-primary my-2" value="Mettre à jour">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    {{ form_end(form) }}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Tous les utilisateurs</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Utilisateur</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Roles</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <img src="../assets/images/avatar-user/avatar-{{ user.username }}.png" class="avatar avatar-sm me-3" alt="user1">
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ user.firstname }} {{ user.lastname }}</h6>
+                                                        <p class="text-xs text-secondary mb-0">{{ user.email }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {% for role in user.roles %}
+                                                    {% if role == "ROLE_USER" %}
+                                                        <p class="text-xs text-secondary mb-0">Utilisateur</p>
+                                                    {% endif %}
+                                                    {% if role == "ROLE_ADMIN" %}
+                                                        <p class="text-xs text-secondary mb-0">Administrateur</p>
+                                                    {% endif %}
+                                                    {% if role == "ROLE_STUDENT" %}
+                                                        <p class="text-xs text-secondary mb-0">Élève</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td class="align-middle">
+                                                <form action="{{ path('user_delete', {'id': user.id}) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                                    <button type="submit" class="text-secondary font-weight-bold text-xs">Supprimer</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    </body>
+{% endblock %}

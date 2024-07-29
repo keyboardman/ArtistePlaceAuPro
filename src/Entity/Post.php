@@ -1,5 +1,7 @@
 <?php
 
+// src/Entity/Post.php
+
 namespace App\Entity;
 
 use App\Repository\PostRepository;
@@ -14,83 +16,85 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $Artiste = null;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $DatePublication = null;
+    private ?\DateTimeInterface $datePublication = null;
 
     #[ORM\Column]
-    private ?bool $Visible = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Categorie = null;
+    private ?bool $visible = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Url = null;
+    private ?string $categorie = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $url = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getArtiste(): ?string
+    public function getUser(): ?User
     {
-        return $this->Artiste;
+        return $this->user;
     }
 
-    public function setArtiste(string $Artiste): static
+    public function setUser(User $user): self
     {
-        $this->Artiste = $Artiste;
+        $this->user = $user;
 
         return $this;
     }
 
     public function getDatePublication(): ?\DateTimeInterface
     {
-        return $this->DatePublication;
+        return $this->datePublication;
     }
 
-    public function setDatePublication(\DateTimeInterface $DatePublication): static
+    public function setDatePublication(\DateTimeInterface $datePublication): self
     {
-        $this->DatePublication = $DatePublication;
+        $this->datePublication = $datePublication;
 
         return $this;
     }
 
     public function isVisible(): ?bool
     {
-        return $this->Visible;
+        return $this->visible;
     }
 
-    public function setVisible(bool $Visible): static
+    public function setVisible(bool $visible): self
     {
-        $this->Visible = $Visible;
+        $this->visible = $visible;
 
         return $this;
     }
 
     public function getCategorie(): ?string
     {
-        return $this->Categorie;
+        return $this->categorie;
     }
 
-    public function setCategorie(?string $Categorie): static
+    public function setCategorie(string $categorie): self
     {
-        $this->Categorie = $Categorie;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
     public function getUrl(): ?string
     {
-        return $this->Url;
+        return $this->url;
     }
 
-    public function setUrl(string $Url): static
+    public function setUrl(string $url): static
     {
-        $this->Url = $Url;
+        $this->url = $url;
 
         return $this;
     }
 }
+

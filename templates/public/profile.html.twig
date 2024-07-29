@@ -1,0 +1,113 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {# {{ parent() }} #}
+    <link href="/assets/css/profile.css" rel="stylesheet">
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>>
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <style>
+        /* ---- grid ---- */
+
+        .grid {
+            position: relative;
+        }
+
+        /* clear fix */
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* ---- .grid-item ---- */
+
+        .grid-item {
+            width: 33.333%;
+        }
+
+        .grid-item {
+            float: left;
+        }
+
+        .grid-item img {
+            display: block;
+            max-width: 100%;
+        }
+    </style>
+
+    <section class="header-content">
+        <div class="profile-header" style="background-image: url('/assets/images/bg1.jpg');">
+            <div class="profile-img">
+                <img src="/assets/images/avatar-user/avatar-{{ artiste }}.png" width="200" alt="Profile Image">
+            </div>
+            <div class="profile-nav-info">
+                <h3 class="user-name">{{ artiste }}</h3>
+            </div>
+        </div>
+
+        {{ form_start(form) }}
+        <input type="submit" class="btn btn-primary my-2" value="Mettre à jour">
+        {{ form_end(form) }}
+
+        <div class="main-bd">
+            <div class="left-side">
+                <div class="profile-side">
+                    <div class="user-bio">
+                        <h3>Bio :</h3>
+                        <p class="bio" id="bio">
+                            Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
+                        </p>
+                        <form method="post" action="#" id="myform">
+                            <textarea name="bio">Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!</textarea>
+                        </form>
+                    </div>
+                    {% if app.user == artiste %}
+                    <div class="profile-btn">
+                        <button onclick="document.getElementById('myform').submit();" id="valid-btn" class="chatbtn valid-btn"><i class="fas fa-edit"></i> Valider</button>
+                        <button onclick="toggleModify()" class="chatbtn" id="chatBtn"><i class="fas fa-edit"></i> Modifier</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div id="gallery">
+            <h1>Créations :</h1>
+            <div class="grid">
+                {% for post in posts %}
+                    <div class="grid-item">
+                        <img src="/assets/posts/{{ post.url }}" />
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+    <script type="module">
+        var $grid = $('.grid').packery({
+            itemSelector: '.grid-item',
+            percentPosition: true
+        });
+        // layout Packery after each image loads
+        $grid.imagesLoaded().progress( function() {
+            $grid.packery();
+        });
+    </script>
+
+    <script type="text/javascript">
+        /* Toggle Modify */
+        function toggleModify(){
+            document.querySelector("#myform").style.display = "block";
+            document.querySelector("#valid-btn").style.display = "block";
+            document.querySelector("#bio").style.display = "none";
+            document.querySelector("#chatBtn").style.display = "none";
+        }
+        /* Toggle Modify */
+    </script>
+    </script>
+
+{% endblock %}

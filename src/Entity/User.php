@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,17 +20,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
+
     #[ORM\Column]
     private ?string $username = null;
 
@@ -41,6 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $biographie = null;
+
+    #[ORM\Column(type: Types::BIGINT, nullable: true)]
+    private ?string $Telephone = null;
 
     public function getId(): ?int
     {
@@ -96,12 +95,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -162,6 +161,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBiographie(?string $biographie): static
     {
         $this->biographie = $biographie;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->Telephone;
+    }
+
+    public function setTelephone(?string $Telephone): static
+    {
+        $this->Telephone = $Telephone;
 
         return $this;
     }

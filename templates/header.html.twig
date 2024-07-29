@@ -23,15 +23,10 @@
                     #navbarTogglerDemo02 > form{
                         display: flex;
                     }
-                    #navbarTogglerDemo02 > form > button{
+                    #searchBtn {
                         margin-left: 10px;
                     }
                 </style>
-                {{ form_start(form) }}
-                {{ form_widget(form.search) }}
-                {{ form_rest(form) }}
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                {{ form_end(form) }}
                 <!--<form class="d-flex ms-auto mb-2 mb-lg-0" role="search">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -44,7 +39,7 @@
                             <ul class="profile-dropdown-item ps-0">
                                 <li><a href="/profile/{{ app.user.username }}"><p>{{ app.user.username }}</p></a></li>
                                 {% if 'ROLE_USER' in app.user.roles %}
-                                    <li><a href="http://adminArtiste/login"><p>Espace Administrateur</p></a></li>
+                                    <li><a href="/admin"><p>Espace Administrateur</p></a></li>
                                 {% endif %}
                                 <li><a href="/user/settings"><p>Paramètres</p></a></li>
                                 <li><a href="/logout"><p>Se déconnecter</p></a></li>

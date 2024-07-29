@@ -2,20 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\User; // Assurez-vous que cette ligne est présente
 use App\Form\UserProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface; // Pour le service d'encodage de mot de passe
+use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-
     #[Route('/user/settings', name: 'app_settings')]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    public function settings(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
     {
-
         $form = $this->createForm(UserProfileType::class, $this->getUser());
         $form->handleRequest($request);
 
@@ -23,8 +23,8 @@ class UserController extends AbstractController
             $user = $form->getData();
 
             $plainPassword = $form->get("plainPassword")->getData();
-            if (!empty($plainPassword)){
-                $hashed = password_hash($plainPassword, PASSWORD_DEFAULT);
+            if (!empty($plainPassword)) {
+                $hashed = $passwordHasher->hashPassword($user, $plainPassword); // Utilisez le service d'encodage de mot de passe
                 $user->setPassword($hashed);
             }
 
@@ -36,7 +36,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_settings');
         }
 
-        return $this->render('settings/index.html.twig', [
+        return $this->render('user/settings.html.twig', [
             'controller_name' => 'SettingsController',
             'form' => $form->createView(),
         ]);
