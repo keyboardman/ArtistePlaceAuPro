@@ -52,16 +52,10 @@
                                                 {{ form_row(form.lastname) }}
                                             </td>
                                             <td>
-                                                {{ form_row(form.username) }}
-                                            </td>
-                                            <td>
                                                 {{ form_row(form.email) }}
                                             </td>
                                             <td>
                                                 {{ form_row(form.telephone) }}
-                                            </td>
-                                            <td>
-                                                {{ form_row(form.file) }}
                                             </td>
                                             <td>
                                                 {{ form_row(form.plainPassword.first) }}
@@ -101,7 +95,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="../assets/images/avatar-user/avatar-{{ user.username }}.png" class="avatar avatar-sm me-3" alt="user1">
+                                                        <img src="../assets/images/avatar-user/avatar-test.png" class="avatar avatar-sm me-3" alt="user1">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">{{ user.firstname }} {{ user.lastname }}</h6>
@@ -125,7 +119,7 @@
                                             <td class="align-middle">
                                                 <form action="{{ path('user_delete', {'id': user.id}) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?');">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                                                    <button type="submit" class="text-secondary font-weight-bold text-xs">Supprimer</button>
+                                                    <button type="submit" class="btn btn-primary btn-danger">Supprimer</button>
                                                 </form>
                                             </td>
                                         </tr>

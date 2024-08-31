@@ -1,611 +1,123 @@
-'use strict';
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ({
 
-// Toggle Menu
-const toggleMenu = document.querySelector('.menu-icon-container');
-const sidebar = document.querySelector('.navbar-mobile');
-const crossSidebar = document.querySelector('.navbar-mobile--cross');
-let menuicon = document.querySelector('.menu-icon');
+/***/ "./src/js/main.js":
+/*!************************!*\
+  !*** ./src/js/main.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-toggleMenu.addEventListener('click', function () {
-  sidebar.classList.toggle('show');
-  document.body.classList.toggle('over');
-});
+"use strict";
+eval(" // Toggle Menu\n\nvar toggleMenu = document.querySelector('.menu-icon-container');\nvar sidebar = document.querySelector('.navbar-mobile');\nvar crossSidebar = document.querySelector('.navbar-mobile--cross');\nvar menuicon = document.querySelector('.menu-icon');\ntoggleMenu.addEventListener('click', function () {\n  sidebar.classList.toggle('show');\n  document.body.classList.toggle('over');\n});\ncrossSidebar.addEventListener('click', function () {\n  sidebar.classList.remove('show');\n  menuicon.classList.remove('transformed');\n});\nvar navMenu = [].slice.call(document.querySelectorAll('.navbar-mobile__menu-item'));\n\nfor (var y = 0; y < navMenu.length; y++) {\n  navMenu[y].addEventListener('click', function () {\n    menuClick(this);\n  });\n}\n\nfunction menuClick(current) {\n  var active = current.classList.contains('open');\n  navMenu.forEach(function (el) {\n    return el.classList.remove('open');\n  });\n\n  if (active) {\n    current.classList.remove('open');\n  } else {\n    current.classList.add('open');\n  }\n}\n\n(function ($) {\n  $('.hamburger-menu a').on('click', function () {\n    $('#mySidenav').css('left', '0');\n    toggleOverlay();\n  });\n\n  function hideNav() {\n    $('#mySidenav').css('left', '-300px');\n    toggleOverlay();\n  }\n\n  $('#overlayy').on('click', function () {\n    hideNav();\n  });\n  $('.closebtn').on('click', function () {\n    hideNav();\n  });\n\n  function toggleOverlay() {\n    $('#overlayy').toggleClass('active');\n  }\n\n  $('.menu-icon-container').on('click', function () {\n    $('.menu-icon').toggleClass('transformed');\n  }); //Events Slider\n\n  $('.eventsSlider').slick({\n    infinite: true,\n    slidesToShow: 3,\n    slidesToScroll: 1,\n    autoplay: false,\n    dots: false,\n    arrows: true,\n    autoplaySpeed: 2000,\n    prevArrow: ' <span class=\"slick-arrow--left\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2,\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 767,\n      settings: {\n        slidesToShow: 1,\n        arrows: false,\n        dots: true\n      }\n    }]\n  }); //Similar events\n\n  $('.similar-events').slick({\n    infinite: true,\n    slidesToShow: 3,\n    slidesToScroll: 1,\n    autoplay: true,\n    dots: false,\n    arrows: true,\n    autoplaySpeed: 2000,\n    prevArrow: ' <span class=\"slick-arrow--left \"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right \"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: false\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2,\n        arrows: false,\n        dots: false\n      }\n    }, {\n      breakpoint: 575,\n      settings: {\n        slidesToShow: 1,\n        arrows: false,\n        dots: false\n      }\n    }]\n  }); // new__courses\n\n  $('.new__courses').slick({\n    infinite: true,\n    slidesToShow: 3,\n    slidesToScroll: 1,\n    autoplay: true,\n    dots: false,\n    arrows: true,\n    autoplaySpeed: 2000,\n    prevArrow: ' <span class=\"slick-arrow--left \"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right \"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: false\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2,\n        arrows: false,\n        dots: false\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1,\n        arrows: false,\n        dots: false\n      }\n    }]\n  }); // our students\n\n  $('.student-slider').slick({\n    infinite: true,\n    slidesToShow: 3,\n    slidesToScroll: 1,\n    autoplay: false,\n    autoplaySpeed: 2000,\n    dots: true,\n    arrows: true,\n    centerMode: true,\n    centerPadding: '0px',\n    prevArrow: '.student-slider-arrows .prev-arrow',\n    nextArrow: '.student-slider-arrows .next-arrow',\n    responsive: [{\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1\n      }\n    }]\n  });\n  $('.about__slider').slick({\n    infinite: true,\n    slidesToShow: 2,\n    slidesToScroll: 1,\n    autoplay: true,\n    arrows: true,\n    dots: true,\n    autoplaySpeed: 2000,\n    nextArrow: '.about-slider-arrows .next-arrow',\n    prevArrow: '.about-slider-arrows .prev-arrow',\n    responsive: [{\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2\n      }\n    }, {\n      breakpoint: 769,\n      settings: {\n        slidesToShow: 1\n      }\n    }]\n  }); //testimonial_slider\n\n  $('.testimonial__slider--one').slick({\n    autoplay: true,\n    autoplaySpeed: 2000,\n    infinite: true,\n    slidesToShow: 2,\n    slidesToScroll: 1,\n    arrows: true,\n    dots: true,\n    prevArrow: ' <span class=\"slick-arrow--left \"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right \"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 1,\n        arrows: false\n      }\n    }]\n  });\n  $('.testimonial__slider--two').slick({\n    infinite: true,\n    slidesToShow: 3,\n    slidesToScroll: 1,\n    autoplay: true,\n    arrows: true,\n    dots: false,\n    centerMode: true,\n    centerPadding: '0px',\n    autoplaySpeed: 2000,\n    prevArrow: ' <span class=\"slick-arrow--left\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2,\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1,\n        arrows: false,\n        dots: true\n      }\n    }]\n  });\n  $('.testimonial__slider--three').slick({\n    infinite: true,\n    slidesToShow: 1,\n    slidesToScroll: 1,\n    autoplay: false,\n    arrows: true,\n    autoplaySpeed: 2000,\n    prevArrow: \" <span class=\\\"slick-arrow--left\\\"> \\n      \\n      <svg width=\\\"18\\\" height=\\\"14\\\" viewBox=\\\"0 0 18 14\\\" fill=\\\"none\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">\\n<path d=\\\"M17 7H1\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\n<path d=\\\"M7 13L1 7L7 1\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\n</svg>\\n\\n      </span>\",\n    nextArrow: \" <span class=\\\"slick-arrow--right\\\">\\n      <svg width=\\\"20\\\" height=\\\"14\\\" viewBox=\\\"0 0 20 14\\\" fill=\\\"none\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">\\n<path d=\\\"M1 7L19 7\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\n<path d=\\\"M13 0.999999L19 7L13 13\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\n</svg>\\n\\n      </span>\",\n    responsive: [{\n      breakpoint: 1201,\n      settings: {\n        arrows: false,\n        dots: true\n      }\n    }]\n  });\n  $('.categories--box').slick({\n    infinite: true,\n    slidesToShow: 5,\n    slidesToScroll: 1,\n    autoplay: true,\n    arrows: true,\n    dots: false,\n    autoplaySpeed: 2000,\n    prevArrow: ' <span class=\"slick-arrow--left\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 1201,\n      settings: {\n        slidesToShow: 3,\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2,\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1,\n        arrows: false,\n        dots: true\n      }\n    }]\n  });\n  $('.categories__slider').slick({\n    infinite: true,\n    slidesToShow: 4,\n    slidesToScroll: 1,\n    autoplay: true,\n    arrows: true,\n    autoplaySpeed: 2000,\n    centerMode: true,\n    centerPadding: '0px',\n    dots: false,\n    prevArrow: ' <span class=\"slick-arrow--left\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: false\n      }\n    }, {\n      breakpoint: 1260,\n      settings: {\n        slidesToShow: 4,\n        slidesToScroll: 1,\n        dots: false\n      }\n    }, {\n      breakpoint: 1080,\n      settings: {\n        slidesToShow: 3,\n        dots: false\n      }\n    }, {\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 2,\n        dots: false\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1,\n        dots: true,\n        arrows: false\n      }\n    }]\n  }); //Brand_slider\n\n  $('.brand-area').slick({\n    infinite: true,\n    slidesToShow: 5,\n    slidesToScroll: 1,\n    arrows: false,\n    autoplay: true,\n    autoplaySpeed: 1600,\n    responsive: [{\n      breakpoint: 1024,\n      settings: {\n        slidesToShow: 4,\n        slidesToScroll: 1\n      }\n    }, {\n      breakpoint: 600,\n      settings: {\n        slidesToShow: 2,\n        slidesToScroll: 1\n      }\n    }, {\n      breakpoint: 480,\n      settings: {\n        slidesToShow: 2,\n        slidesToScroll: 1\n      }\n    }]\n  }); //Mentor _Slider\n\n  $('.ourinstructor-active').slick({\n    infinite: true,\n    slidesToShow: 4,\n    slidesToScroll: 1,\n    autoplay: false,\n    autoplaySpeed: 2000,\n    prevArrow: ' <span class=\"slick-arrow--left\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg></span>',\n    nextArrow: ' <span class=\"slick-arrow--right\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></span>',\n    responsive: [{\n      breakpoint: 1441,\n      settings: {\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 1200,\n      settings: {\n        slidesToShow: 3,\n        slidesToScroll: 1,\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 993,\n      settings: {\n        slidesToShow: 2,\n        slidesToScroll: 1,\n        arrows: false,\n        dots: true\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1,\n        centerMode: true,\n        centerPadding: '15px',\n        arrows: false,\n        dots: true\n      }\n    }]\n  }); //Event _Slider\n\n  $('.ourevent-active').slick({\n    infinite: true,\n    slidesToShow: 3,\n    slidesToScroll: 1,\n    autoplay: false,\n    arrows: true,\n    autoplaySpeed: 2000,\n    prevArrow: '.ourevent__wrapper .prev-arrow',\n    nextArrow: '.ourevent__wrapper .next-arrow',\n    responsive: [{\n      breakpoint: 1199,\n      settings: {\n        slidesToShow: 2\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1\n      }\n    }]\n  }); //Event _Slider\n\n  $('.browseCategories').slick({\n    infinite: true,\n    slidesToShow: 4,\n    slidesToScroll: 1,\n    autoplay: false,\n    dots: true,\n    arrows: true,\n    autoplaySpeed: 2000,\n    nextArrow: ' .browse__right--arrow',\n    prevArrow: ' .browse__left--arrow',\n    responsive: [{\n      breakpoint: 1199,\n      settings: {\n        slidesToShow: 2\n      }\n    }, {\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 1\n      }\n    }]\n  }); // filter items on button click\n\n  $('.populercourse-ist').on('click', 'li', function () {\n    var filterValue = $(this).attr('data-filter');\n    $grid.isotope({\n      filter: filterValue\n    }); // filter items on button click\n\n    $('.populercourse-ist').on('click', 'li', function () {\n      var filterValue = $(this).attr('data-filter');\n      $grid.isotope({\n        filter: filterValue\n      });\n    });\n  });\n  /* magnificPopup video view */\n\n  $('.popup-video').magnificPopup({\n    type: 'iframe'\n  }); //nice-select\n\n  $(document).ready(function () {\n    $('select').niceSelect();\n  }); // init Isotope\n\n  var $grid = $('.populercourse-item').isotope({// options\n  });\n})(jQuery);\n\n//# sourceURL=webpack:///./src/js/main.js?");
 
-crossSidebar.addEventListener('click', function () {
-  sidebar.classList.remove('show');
-  menuicon.classList.remove('transformed');
-});
+/***/ }),
 
-var navMenu = [].slice.call(document.querySelectorAll('.navbar-mobile__menu-item'));
+/***/ "./src/scss/main.scss":
+/*!****************************!*\
+  !*** ./src/scss/main.scss ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-for (var y = 0; y < navMenu.length; y++) {
-  navMenu[y].addEventListener('click', function () {
-    menuClick(this);
-  });
-}
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/scss/main.scss?");
 
-function menuClick(current) {
-  const active = current.classList.contains('open');
-  navMenu.forEach((el) => el.classList.remove('open'));
-  if (active) {
-    current.classList.remove('open');
-  } else {
-    current.classList.add('open');
-  }
-}
+/***/ }),
 
-(function ($) {
-  $('.hamburger-menu a').on('click', function () {
-    $('#mySidenav').css('left', '0');
-    toggleOverlay();
-  });
+/***/ 0:
+/*!***************************************************!*\
+  !*** multi ./src/js/main.js ./src/scss/main.scss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-  function hideNav() {
-    $('#mySidenav').css('left', '-300px');
-    toggleOverlay();
-  }
+eval("__webpack_require__(/*! ./src/js/main.js */\"./src/js/main.js\");\nmodule.exports = __webpack_require__(/*! ./src/scss/main.scss */\"./src/scss/main.scss\");\n\n\n//# sourceURL=webpack:///multi_./src/js/main.js_./src/scss/main.scss?");
 
-  $('#overlayy').on('click', function () {
-    hideNav();
-  });
+/***/ })
 
-  $('.closebtn').on('click', function () {
-    hideNav();
-  });
-
-  function toggleOverlay() {
-    $('#overlayy').toggleClass('active');
-  }
-
-  $('.menu-icon-container').on('click', function () {
-    $('.menu-icon').toggleClass('transformed');
-  });
-
-  //Events Slider
-  $('.eventsSlider').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false,
-    dots: false,
-    arrows: true,
-    autoplaySpeed: 2000,
-    prevArrow:
-      ' <span class="slick-arrow--left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-    ],
-  });
-
-  //Similar events
-  $('.similar-events').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    dots: false,
-    arrows: true,
-    autoplaySpeed: 2000,
-    prevArrow:
-      ' <span class="slick-arrow--left "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 575,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-          dots: false,
-        },
-      },
-    ],
-  });
-
-  // new__courses
-  $('.new__courses').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    dots: false,
-    arrows: true,
-    autoplaySpeed: 2000,
-    prevArrow:
-      ' <span class="slick-arrow--left "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-          dots: false,
-        },
-      },
-    ],
-  });
-
-  // our students
-  $('.student-slider').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 2000,
-    dots: true,
-    arrows: true,
-    centerMode: true,
-    centerPadding: '0px',
-    prevArrow: '.student-slider-arrows .prev-arrow',
-    nextArrow: '.student-slider-arrows .next-arrow',
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  });
-
-  $('.about__slider').slick({
-    infinite: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: true,
-    arrows: true,
-    dots: true,
-    autoplaySpeed: 2000,
-    nextArrow: '.about-slider-arrows .next-arrow',
-    prevArrow: '.about-slider-arrows .prev-arrow',
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  });
-
-  //testimonial_slider
-  $('.testimonial__slider--one').slick({
-    autoplay: true,
-    autoplaySpeed: 2000,
-    infinite: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: true,
-    prevArrow:
-      ' <span class="slick-arrow--left "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-        },
-      },
-    ],
-  });
-
-  $('.testimonial__slider--two').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    arrows: true,
-    dots: false,
-    centerMode: true,
-    centerPadding: '0px',
-    autoplaySpeed: 2000,
-    prevArrow:
-      ' <span class="slick-arrow--left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-    ],
-  });
-
-  $('.testimonial__slider--three').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    arrows: true,
-    autoplaySpeed: 2000,
-    prevArrow: ` <span class="slick-arrow--left"> 
-      
-      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M17 7H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M7 13L1 7L7 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-      </span>`,
-    nextArrow: ` <span class="slick-arrow--right">
-      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 7L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M13 0.999999L19 7L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-      </span>`,
-    responsive: [
-      {
-        breakpoint: 1201,
-        settings: {
-          arrows: false,
-          dots: true,
-        },
-      },
-    ],
-  });
-
-  $('.categories--box').slick({
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    arrows: true,
-    dots: false,
-    autoplaySpeed: 2000,
-    prevArrow:
-      ' <span class="slick-arrow--left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 1201,
-        settings: {
-          slidesToShow: 3,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-    ],
-  });
-
-  $('.categories__slider').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    arrows: true,
-    autoplaySpeed: 2000,
-    centerMode: true,
-    centerPadding: '0px',
-    dots: false,
-    prevArrow:
-      ' <span class="slick-arrow--left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 1260,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 1080,
-        settings: {
-          slidesToShow: 3,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          dots: true,
-          arrows: false,
-        },
-      },
-    ],
-  });
-
-  //Brand_slider
-  $('.brand-area').slick({
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 1600,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  });
-
-  //Mentor _Slider
-  $('.ourinstructor-active').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 2000,
-    prevArrow:
-      ' <span class="slick-arrow--left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span>',
-    nextArrow:
-      ' <span class="slick-arrow--right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
-    responsive: [
-      {
-        breakpoint: 1441,
-        settings: {
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 993,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          centerMode: true,
-          centerPadding: '15px',
-          arrows: false,
-          dots: true,
-        },
-      },
-    ],
-  });
-
-  //Event _Slider
-  $('.ourevent-active').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false,
-    arrows: true,
-    autoplaySpeed: 2000,
-    prevArrow: '.ourevent__wrapper .prev-arrow',
-    nextArrow: '.ourevent__wrapper .next-arrow',
-    responsive: [
-      {
-        breakpoint: 1199,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  });
-
-  //Event _Slider
-  $('.browseCategories').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: false,
-    dots: true,
-    arrows: true,
-    autoplaySpeed: 2000,
-    nextArrow: ' .browse__right--arrow',
-    prevArrow: ' .browse__left--arrow',
-    responsive: [
-      {
-        breakpoint: 1199,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  });
-
-  // filter items on button click
-  $('.populercourse-ist').on('click', 'li', function () {
-    var filterValue = $(this).attr('data-filter');
-    $grid.isotope({
-      filter: filterValue,
-    });
-
-    // filter items on button click
-    $('.populercourse-ist').on('click', 'li', function () {
-      var filterValue = $(this).attr('data-filter');
-      $grid.isotope({
-        filter: filterValue,
-      });
-    });
-  });
-
-  /* magnificPopup video view */
-  $('.popup-video').magnificPopup({
-    type: 'iframe',
-  });
-
-  //nice-select
-  $(document).ready(function () {
-    $('select').niceSelect();
-  });
-
-  // init Isotope
-  var $grid = $('.populercourse-item').isotope({
-    // options
-  });
-})(jQuery);
+/******/ });

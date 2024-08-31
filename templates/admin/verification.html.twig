@@ -1,0 +1,240 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Bienvenue!{% endblock %}
+
+{% block body %}
+    <style>
+        body {
+            text-align: center;
+        }
+        .image-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 0 10px
+            rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        /* Styling for the close button */
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /* Styling for the image */
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Styles for the popup */
+         .popup {
+             display: none; /* Hide the popup by default */
+             position: fixed;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             width: 80%;
+             max-width: 600px;
+             padding: 20px;
+             background: #fff;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+             z-index: 1000;
+             text-align: center;
+         }
+        .popup img {
+            max-width: 100%;
+            height: auto;
+        }
+        .popup .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 16px;
+        }
+        /* Styles for the overlay */
+        .overlay {
+            display: none; /* Hide the overlay by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+    <body class="g-sidenav-show bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <main class="main-content position-relative border-radius-lg" style="padding-left: 17%;">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+                    </ol>
+                    <h6 class="font-weight-bolder text-white mb-0">
+                        Vérification
+                    </h6>
+                </nav>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Verification des posts</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>Prénom</th>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                            <th>Prévisualisé</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for post in posts %}
+                                        <tr>
+                                            <td>{{ post.id }}</td>
+                                            <td>{{ post.user.firstname }}</td>
+                                            <td>{{ post.user.lastname }}</td>
+                                            <td>{{ post.user.email }}</td>
+                                            <td><button class="btn btn-primary" onclick="showImage('{{ post.filePath }}')">Preview Image</button></td>
+                                            <td class="d-flex justify-content-center">
+                                                <div class="me-3">
+                                                    <form action="{{ path('post_toggle_visibility', {'id': post.id}) }}" method="post">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ post.id) }}">
+                                                        <button class="btn btn-primary btn-success" type="submit">Valider</button>
+                                                    </form>
+                                                </div>
+                                                <div>
+                                                    <form action="{{ path('post_delete', {'id': post.id }) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer ce Post ?');">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                                                        <button class="btn btn-primary btn-danger" type="submit">Refuser</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script type="application/javascript">
+        function showImage(url) {
+            var popup = document.getElementById('popup');
+            var popupImage = document.getElementById('popupImage');
+            var overlay = document.getElementById('overlay');
+            var closeButton = document.getElementById('closeButton');
+
+            popupImage.src = url;
+            popup.style.display = 'block'; // Show the popup
+            overlay.style.display = 'block'; // Show the overlay
+
+            // Close the popup when the close button or overlay is clicked
+            closeButton.addEventListener('click', function() {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+
+            overlay.addEventListener('click', function() {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        }
+    </script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script type="application/javascript">
+        function showImage(url) {
+            var imageContainer =
+                document.createElement("div");
+            imageContainer.className =
+                "image-container";
+
+            var image =
+                document.createElement("img");
+            image.src = url;
+            var closeButton =
+                document.createElement(
+                    "button"
+                );
+            closeButton.textContent = "Close";
+            closeButton.className =
+                "close-btn";
+            closeButton.onclick =
+                function () {
+                    document.body.removeChild(
+                        imageContainer
+                    );
+                };
+
+            imageContainer.appendChild(
+                closeButton
+            );
+            imageContainer.appendChild(image);
+
+            document.body.appendChild(
+                imageContainer
+            );
+        }
+    </script>
+    </body>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block title %}Post{% endblock %}
+
+{% block content %}
+    {% set formattedFirstname = post.firstname|lower|capitalize %}
+    {% set formattedLastname = post.lastname|lower %}
+    {% set abbreviatedLastname = formattedLastname|slice(0, 1) ~ '.' %}
+
+    <main role="main">
+        <section class="bg-gray200 pt-5 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <article class="card">
+                            <img class="card-img-top mb-2" src="../{{ post.filePath }}" alt="Card image">
+                            <div class="card-body">
+                                <h1 class="card-title display-4">
+                                    {{ post.titre }} </h1>
+                                <p>
+                                    {{ post.description }}
+                                </p>
+                                <small class="d-block">
+                                    <a class="btn btn-sm" href="/profile/{{ post.userToken }}">
+                                        <p class="font-weight-bold title">{{ formattedFirstname }} {{ abbreviatedLastname }}</p>
+                                    </a>
+                                </small>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-5">
+                <div class="row">
+                    <h5 class="font-weight-bold">Plus de posts ?</h5>
+                    <div class="card-columns">
+                        {% for post in lastPosts %}
+                            <div class="card card-pin">
+                                <img class="card-img" src="../{{ post.filePath }}" alt="Card image">
+                                <div class="overlay">
+                                    <h2 class="card-title title">{{ post.titre }}</h2>
+                                    <div class="more">
+                                        <a href="/post/{{ post.token }}">
+                                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Plus </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{% block title %}{% endblock %} - Course Search-Eduguard</title>
-    <link rel="stylesheet" href="assets/scss/vendors/plugin/css/jquery-ui.css" />
-    <link rel="stylesheet" href="assets/dist/main.css" />
-    <link rel="icon" type="image/png" href="assets/dist/images/favicon/favicon.png" />
+    <link rel="stylesheet" href="../assets/scss/vendors/plugin/css/jquery-ui.css" />
+    <link rel="stylesheet" href="../assets/dist/main.css" />
+    <link rel="icon" type="image/png" href=../assets/dist/images/favicon/favicon.png" />
 </head>
 
 <body style="background-color: #ebebf2;" onload="loader()">
@@ -20,7 +20,7 @@
             <div class="container">
                 <!-- Logo -->
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/images/logo/logo.png" alt="Logo" class="img-fluid" />
+                    <img src=../assets/images/logo/logo.png" alt="Logo" class="img-fluid" />
                 </a>
 
                 <button class="menu-icon-container">
@@ -154,7 +154,11 @@
                         </a>
                         <div class="user-image ms-3">
                             <a href="students-profile.html">
-                                <img src="assets/images/ellipse/user.jpg" alt="User" />
+                                {% set formattedFirstname = app.user.firstname|lower|capitalize %}
+                                {% set formattedLastname = app.user.lastname|lower %}
+                                {% set abbreviatedLastname = formattedLastname|slice(0, 1) ~ '.' %}
+
+                                <img src="../{{ app.user.avatarUrl }}" alt="{{ formattedFirstname }} {{ abbreviatedLastname }}" />
                             </a>
                         </div>
                     </div>
@@ -164,7 +168,7 @@
                     <div>
                         <div class="navbar-mobile__top">
                             <a href="index.html">
-                                <img src="assets/images/logo/logo.png" alt="brand" class="img-fluid" />
+                                <img src=../assets/images/logo/logo.png" alt="brand" class="img-fluid" />
                             </a>
                             <div>
                                 <a href="cart.html" class="cart-nav">
@@ -414,7 +418,7 @@
                 <div class="col-lg-6">
                     <div class="footer__wrapper">
                         <div class="footer__wrapper_logo">
-                            <img src="assets/images/logo/footerlogo.png" alt="logo" class="img-fluid" />
+                            <img src=../assets/images/logo/footerlogo.png" alt="logo" class="img-fluid" />
                         </div>
                         <p>
                             Duis posuere maximus arcu eu tincidunt. Nam rutrum, nibh vitae tempus venenatis, ex tortor ultricies magna.
@@ -593,16 +597,16 @@
     </footer>
     <!-- Footer Ends Here -->
 
-    <script src="src/js/jquery.min.js"></script>
-    <script src="src/js/bootstrap.bundle.min.js"></script>
-    <script src="src/scss/vendors/plugin/js/isotope.pkgd.min.js"></script>
-    <script src="src/scss/vendors/plugin/js/jquery.magnific-popup.min.js"></script>
-    <script src="src/scss/vendors/plugin/js/slick.min.js"></script>
-    <script src="src/scss/vendors/plugin/js/jquery.nice-select.min.js"></script>
-    <script src="src/scss/vendors/plugin/js/price_range_script.js"></script>
-    <script src="src/scss/vendors/plugin/js/jquery-ui.min.js"></script>
-    <script src="src/js/app.js"></script>
-    <script src="assets/main.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/scss/vendors/plugin/js/isotope.pkgd.min.js"></script>
+    <script src="../assets/scss/vendors/plugin/js/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/scss/vendors/plugin/js/slick.min.js"></script>
+    <script src="../assets/scss/vendors/plugin/js/jquery.nice-select.min.js"></script>
+    <script src="../assets/scss/vendors/plugin/js/price_range_script.js"></script>
+    <script src="../assets/scss/vendors/plugin/js/jquery-ui.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src=../assets/js/main.js"></script>
     <script>
         const filterBtn = document.querySelector("#filter");
         const cross = document.querySelector(".filter--cross");

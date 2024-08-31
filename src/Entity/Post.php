@@ -1,7 +1,5 @@
 <?php
 
-// src/Entity/Post.php
-
 namespace App\Entity;
 
 use App\Repository\PostRepository;
@@ -9,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Post
 {
     #[ORM\Id]
@@ -26,15 +25,42 @@ class Post
     #[ORM\Column]
     private ?bool $visible = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $categorie = null;
-
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $url = null;
+    private ?string $filePath = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $token = null;
+
+    #[ORM\Column(length: 180)]
+    private ?string $titre = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __construct()
+    {
+        $this->visible = false;
+    }
+
+    public function getDatePublication(): ?\DateTimeInterface
+    {
+        return $this->datePublication;
+    }
+
+    public function setDatePublication(\DateTimeInterface $datePublication): static
+    {
+        $this->datePublication = $datePublication;
+        return $this;
+    }
+
+    public function isVisible(): ?bool
+    {
+        return $this->visible;
     }
 
     public function getUser(): ?User
@@ -45,56 +71,65 @@ class Post
     public function setUser(User $user): self
     {
         $this->user = $user;
-
         return $this;
     }
 
-    public function getDatePublication(): ?\DateTimeInterface
-    {
-        return $this->datePublication;
-    }
-
-    public function setDatePublication(\DateTimeInterface $datePublication): self
-    {
-        $this->datePublication = $datePublication;
-
-        return $this;
-    }
-
-    public function isVisible(): ?bool
-    {
-        return $this->visible;
-    }
-
-    public function setVisible(bool $visible): self
+    public function setVisible(bool $visible): static
     {
         $this->visible = $visible;
-
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getFilePath(): ?string
     {
-        return $this->categorie;
+        return $this->filePath;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setFilePath(string $filePath): static
     {
-        $this->categorie = $categorie;
-
+        $this->filePath = $filePath;
         return $this;
     }
 
-    public function getUrl(): ?string
+    #[ORM\PrePersist]
+    public function setDefaultDatePublication(): void
     {
-        return $this->url;
+        if ($this->datePublication === null) {
+            $this->datePublication = new \DateTime();
+        }
     }
 
-    public function setUrl(string $url): static
+    public function getToken(): ?string
     {
-        $this->url = $url;
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): static
+    {
+        $this->titre = $titre;
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
 }
-

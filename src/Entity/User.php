@@ -20,26 +20,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $password = null;
 
-    #[ORM\Column]
-    private ?string $username = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 180)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 180)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $biographie = null;
 
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
-    private ?string $Telephone = null;
+    private ?string $telephone = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $avatarUrl = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $token = null;
 
     public function getId(): ?int
     {
@@ -54,79 +57,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
-    public function __toString(): string
-    {
-        return $this->username ?? '';
-    }
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): void
-    {
-        $this->username = $username;
     }
 
     public function getFirstname(): ?string
@@ -134,10 +87,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(?string $firstname): static
+    public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 
@@ -146,10 +98,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastname;
     }
 
-    public function setLastname(?string $lastname): static
+    public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
         return $this;
     }
 
@@ -161,18 +112,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBiographie(?string $biographie): static
     {
         $this->biographie = $biographie;
-
         return $this;
     }
 
     public function getTelephone(): ?string
     {
-        return $this->Telephone;
+        return $this->telephone;
     }
 
-    public function setTelephone(?string $Telephone): static
+    public function setTelephone(?string $telephone): static
     {
-        $this->Telephone = $Telephone;
+        $this->telephone = $telephone;
+        return $this;
+    }
+
+    public function getAvatarUrl(): ?string
+    {
+        return $this->avatarUrl;
+    }
+
+    public function setAvatarUrl(string $avatarUrl): static
+    {
+        $this->avatarUrl = $avatarUrl;
+        return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

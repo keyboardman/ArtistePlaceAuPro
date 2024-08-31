@@ -5,32 +5,23 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Uid\Uuid;
 
 class UserProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Generate a unique token
+        $token = Uuid::v4()->toRfc4122();
+
         $builder
-            ->add('username', TextType::class,[
-                'label' => "Nom artiste",
-                'required' => true,
-                'attr' => [
-                    'placeholder' => "Nom artiste"
-                ]
-            ])
-            ->add('email', EmailType::class,[
-                'label' => "Adresse email",
-                'attr' => [
-                    'placeholder' => 'Adresse email'
-                ]
-            ])
             ->add('firstname', TextType::class,[
                 'label' => "Prénom",
                 'required' => false,
@@ -45,12 +36,10 @@ class UserProfileType extends AbstractType
                     'placeholder' => 'Nom'
                 ]
             ])
-            ->add('file', FileType::class,[
-                'label' => "Avatar",
-                'mapped' => false,
-                'required' => false,
+            ->add('email', EmailType::class,[
+                'label' => "Adresse email",
                 'attr' => [
-                    'placeholder' => 'Avatar'
+                    'placeholder' => 'Adresse email'
                 ]
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -64,15 +53,20 @@ class UserProfileType extends AbstractType
                 ],
                 'second_options' => [
                     'label' => 'Repeat Password',
-                    ],
-                ])
+                ],
+            ])
             ->add('telephone', TelType::class,[
                 'label' => "Téléphone",
-                'mapped' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => "Téléphone"
                 ]
+            ])
+            ->add('avatarUrl', HiddenType::class,[
+                'data' => 'assets/images/avatar-user/avatar-default.png',
+            ])
+            ->add('token', HiddenType::class,[
+                'data' => $token,
             ])
         ;
     }

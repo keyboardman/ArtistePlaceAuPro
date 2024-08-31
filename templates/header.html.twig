@@ -1,57 +1,37 @@
-<header id="header">
-    <nav class="navbar navbar-expand-lg fixed-top px-3" data-bs-theme="dark" style="background-color: #2D2D2D; opacity: 1 !important;">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                ArtistePlaceAuPro
-            </a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav align-items-center ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/bd">BD</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/creations">Créations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/artistes">Artistes</a>
-                    </li>
-                </ul>
-                <style>
-                    #navbarTogglerDemo02 > form{
-                        display: flex;
-                    }
-                    #searchBtn {
-                        margin-left: 10px;
-                    }
-                </style>
-                <!--<form class="d-flex ms-auto mb-2 mb-lg-0" role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>-->
-                <div class="last-child-nav ms-auto mb-lg-0 my-auto me-5">
-                    {% if app.user %}
-                        <label for="profile2" class="profile-dropdown">
-                            <div id="profile-avatar" style="background:url('/assets/images/avatar-user/avatar-{{ app.user.username }}.png') center no-repeat;"></div>
-                            <input type="checkbox" id="profile2">
-                            <ul class="profile-dropdown-item ps-0">
-                                <li><a href="/profile/{{ app.user.username }}"><p>{{ app.user.username }}</p></a></li>
-                                {% if 'ROLE_USER' in app.user.roles %}
-                                    <li><a href="/admin"><p>Espace Administrateur</p></a></li>
-                                {% endif %}
-                                <li><a href="/user/settings"><p>Paramètres</p></a></li>
-                                <li><a href="/logout"><p>Se déconnecter</p></a></li>
-                            </ul>
-                        </label>
-                    {% else %}
-                        <a class="header_navbar_sign-in" href="/login">
-                            <i class="fas fa-2x fa-sign-in-alt"></i>
-                        </a>
-                    {% endif %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <a class="navbar-brand font-weight-bolder mr-3" href="/"><img src="../assets/img/logo.png"></a>
+    <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsDefault">
+        <ul class="navbar-nav mr-auto align-items-center">
+            <form class="bd-search hidden-sm-down">
+                <input type="text" class="form-control bg-graylight border-0 font-weight-bold" id="search-input" placeholder="Search..." autocomplete="off">
+                <div class="dropdown-menu bd-search-results" id="search-results">
                 </div>
-            </div>
-        </div>
-    </nav>
-</header>
+            </form>
+        </ul>
+        <ul class="navbar-nav ml-auto mr-6 align-items-center">
+            {% if app.user %}
+                {% set formattedFirstname = app.user.firstname|lower|capitalize %}
+                {% set formattedLastname = app.user.lastname|lower %}
+                {% set abbreviatedLastname = formattedLastname|slice(0, 1) ~ '.' %}
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile/{{ app.user.token }}"><img class="rounded-circle mr-2" src="../{{ app.user.avatarUrl }}" width="30"><span class="align-middle">{{ formattedFirstname }} {{ abbreviatedLastname }}</span></a>
+                </li>
+            {% else %}
+                <a href="/login">
+                    <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.00098 11.999L16.001 11.999M16.001 11.999L12.501 8.99902M16.001 11.999L12.501 14.999" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
