@@ -4,13 +4,6 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
-        <ul class="navbar-nav mr-auto align-items-center">
-            <form class="bd-search hidden-sm-down">
-                <input type="text" class="form-control bg-graylight border-0 font-weight-bold" id="search-input" placeholder="Search..." autocomplete="off">
-                <div class="dropdown-menu bd-search-results" id="search-results">
-                </div>
-            </form>
-        </ul>
         <ul class="navbar-nav ml-auto mr-6 align-items-center">
             {% if app.user %}
                 {% set formattedFirstname = app.user.firstname|lower|capitalize %}
@@ -20,6 +13,21 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/">Accueil</a>
                 </li>
+
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student">Espace Étudiant</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Espace Administrateur</a>
+                    </li>
+                {% endif %}
+
+                {% if 'ROLE_STUDENT' in app.user.roles %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student">Espace Étudiant</a>
+                    </li>
+                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="/profile/{{ app.user.token }}"><img class="rounded-circle mr-2" src="../{{ app.user.avatarUrl }}" width="30"><span class="align-middle">{{ formattedFirstname }} {{ abbreviatedLastname }}</span></a>

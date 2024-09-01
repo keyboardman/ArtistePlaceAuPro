@@ -30,9 +30,19 @@ class PublicController extends AbstractController
             ->getQuery()
             ->getArrayResult();
 
-        // Render the home page with the posts
+        // Fetch the last 5 registered users
+        $users = $entityManager->createQueryBuilder()
+            ->select('u.token', 'u.firstname', 'u.lastname', 'u.avatarUrl')
+            ->from(User::class, 'u')
+            ->orderBy('u.id', 'DESC') // Order by the latest users
+            ->setMaxResults(5) // Limit to 5 users
+            ->getQuery()
+            ->getArrayResult();
+
+        // Render the home page with the posts and users
         return $this->render('public/home.html.twig', [
             'posts' => $posts,
+            'users' => $users,
         ]);
     }
 
@@ -114,6 +124,10 @@ class PublicController extends AbstractController
         SluggerInterface $slugger,
         string $token
     ): Response {
+        // Fetch the User entity by token
+        $userFetch = $entityManager->getRepository(User::class)
+            ->findOneBy(['token' => $token]);
+
         // Fetch user and posts in a single query
         $user = $entityManager->createQueryBuilder()
             ->select('u.id, u.firstname, u.lastname, u.biographie, u.avatarUrl')
@@ -152,7 +166,7 @@ class PublicController extends AbstractController
             }
 
             // Set the user for the post
-            $post->setUser($user);
+            $post->setUser($userFetch);
 
             // Set default visibility to false
             $post->setVisible(false);

@@ -122,4 +122,48 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_adminVerification');
     }
 
+    #[Route('/admin/user/{id}/add-role', name: 'user_add_role', methods: ['POST'])]
+    public function addRole(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $role = $request->request->get('role'); // Get the role from the POST data
+
+        if ($this->isCsrfTokenValid('role_action' . $user->getId(), $request->request->get('_token'))) {
+            if (in_array($role, ['ROLE_ADMIN', 'ROLE_STUDENT'])) {
+                $user->addRole($role);
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', sprintf('Role %s added to user successfully.', $role));
+            } else {
+                $this->addFlash('error', 'Invalid role specified.');
+            }
+        } else {
+            $this->addFlash('error', 'Invalid CSRF token.');
+        }
+
+        return $this->redirectToRoute('app_admin');
+    }
+
+    #[Route('/admin/user/{id}/remove-role', name: 'user_remove_role', methods: ['POST'])]
+    public function removeRole(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $role = $request->request->get('role'); // Get the role from the POST data
+
+        if ($this->isCsrfTokenValid('role_action' . $user->getId(), $request->request->get('_token'))) {
+            if (in_array($role, ['ROLE_ADMIN', 'ROLE_STUDENT'])) {
+                $user->removeRole($role);
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', sprintf('Role %s removed from user successfully.', $role));
+            } else {
+                $this->addFlash('error', 'Invalid role specified.');
+            }
+        } else {
+            $this->addFlash('error', 'Invalid CSRF token.');
+        }
+
+        return $this->redirectToRoute('app_admin');
+    }
+
 }

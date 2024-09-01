@@ -21,7 +21,6 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        {# templates/base.html.twig (ou un autre template approprié) #}
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}
@@ -44,29 +43,29 @@
                                 <table class="table align-items-center mb-0">
                                     {{ form_start(form) }}
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                {{ form_row(form.firstname) }}
-                                            </td>
-                                            <td>
-                                                {{ form_row(form.lastname) }}
-                                            </td>
-                                            <td>
-                                                {{ form_row(form.email) }}
-                                            </td>
-                                            <td>
-                                                {{ form_row(form.telephone) }}
-                                            </td>
-                                            <td>
-                                                {{ form_row(form.plainPassword.first) }}
-                                            </td>
-                                            <td>
-                                                {{ form_row(form.plainPassword.second) }}
-                                            </td>
-                                            <td>
-                                                <input type="submit" class="btn btn-primary my-2" value="Mettre à jour">
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.firstname) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.lastname) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.email) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.telephone) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.plainPassword.first) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.plainPassword.second) }}
+                                        </td>
+                                        <td>
+                                            <input type="submit" class="btn btn-primary my-2" value="Mettre à jour">
+                                        </td>
+                                    </tr>
                                     </tbody>
                                     {{ form_end(form) }}
                                 </table>
@@ -117,9 +116,27 @@
                                                 {% endfor %}
                                             </td>
                                             <td class="align-middle">
-                                                <form action="{{ path('user_delete', {'id': user.id}) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                                <form action="{{ path('user_add_role', {'id': user.id}) }}" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('role_action' ~ user.id) }}">
+                                                    <select name="role" class="form-select form-select-sm">
+                                                        <option value="ROLE_ADMIN">Ajouter Admin</option>
+                                                        <option value="ROLE_STUDENT">Ajouter Élève</option>
+                                                    </select>
+                                                    <button type="submit" class="btn btn-primary btn-sm mt-1">Ajouter</button>
+                                                </form>
+
+                                                <form action="{{ path('user_remove_role', {'id': user.id}) }}" method="post" class="d-inline-block">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('role_action' ~ user.id) }}">
+                                                    <select name="role" class="form-select form-select-sm">
+                                                        <option value="ROLE_ADMIN">Retirer Admin</option>
+                                                        <option value="ROLE_STUDENT">Retirer Élève</option>
+                                                    </select>
+                                                    <button type="submit" class="btn btn-warning btn-sm mt-1">Retirer</button>
+                                                </form>
+
+                                                <form action="{{ path('user_delete', {'id': user.id}) }}" method="post" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?');" class="d-inline-block">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                                                    <button type="submit" class="btn btn-primary btn-danger">Supprimer</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm mt-1">Supprimer</button>
                                                 </form>
                                             </td>
                                         </tr>

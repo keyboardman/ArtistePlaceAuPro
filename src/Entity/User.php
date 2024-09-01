@@ -44,6 +44,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $token = null;
 
+    // Getters and Setters
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,7 +64,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return $this->roles;
+        // Ensure every user at least has ROLE_USER
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
@@ -156,7 +161,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setToken(string $token): self
     {
         $this->token = $token;
+        return $this;
+    }
 
+    // Add Role
+    public function addRole(string $role): self
+    {
+        if (!in_array($role, $this->roles)) {
+            $this->roles[] = $role;
+        }
+        return $this;
+    }
+
+    // Remove Role
+    public function removeRole(string $role): self
+    {
+        $this->roles = array_filter($this->roles, function ($existingRole) use ($role) {
+            return $existingRole !== $role;
+        });
         return $this;
     }
 }
