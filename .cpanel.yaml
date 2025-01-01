@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - composer install --no-dev --optimize-autoloader
+    - php bin/console d:m:m
+		- php bin/console importmap:install
+		- php bin/console asset-map:compile
+		- php bin/console c:c
