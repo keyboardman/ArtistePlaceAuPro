@@ -11,60 +11,139 @@
     {% set formattedLastname = artiste.lastname|lower %}
     {% set abbreviatedLastname = formattedLastname|slice(0, 1) ~ '.' %}
 
-    <main role="main">
-        <div class="jumbotron border-round-0" style="background-image:url(https://images.unsplash.com/photo-1522204657746-fccce0824cfd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=84b5e9bea51f72c63862a0544f76e0a3&auto=format&fit=crop&w=1500&q=80); min-height: 15vh;">
-        </div>
-        <div class="container mb-4">
-            <img src="../{{ artiste.avatarUrl }}" class="mt-neg100 mb-4 rounded-circle" width="128">
-            <h1 class="font-weight-bold title">{{ formattedFirstname }} {{ abbreviatedLastname }}</h1>
-            <p>
-                {{ artiste.biographie }}
-            </p>
-        </div>
-        {% if app.user.id == artiste.id %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
+    <link rel="stylesheet" href="../assets/css/photoswipe.css">
+
+    <section class="hero-without-image-3">
+        <div class="container-3"></div>
+    </section>
+    <div class="content-wrapper">
+        <div class="w-container">
+            <div class="w-row">
+                <div class="w-hidden-small w-hidden-tiny w-col w-col-3">
+                    <div class="white-wrapper"><img src="../assets/images/artiste1.png" alt="" class="circle-profile">
+                        <h1 class="font-weight-bold title">{{ formattedFirstname }} {{ abbreviatedLastname }}</h1>
+                        <p class="site-description">{{ artiste.biographie }}</p>
+                        <div class="grey-rule"></div>
+                        <div class="social-link-group">
+                            <a href="#" class="social-icon-link w-inline-block"><img src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed39811ff2c6_social-03.svg" width="25" alt=""></a>
+                            <a href="#" class="social-icon-link w-inline-block"><img src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed1ad11ff2da_social-07.svg" width="25" alt=""></a>
+                            <a href="#" class="social-icon-link w-inline-block"><img src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed1f5b1ff2bf_social-18.svg" width="25" alt=""></a>
+                            <a href="#" class="social-icon-link w-inline-block"><img src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed7e751ff288_social-09.svg" width="25" alt=""></a>
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-            {{ form_start(form) }}
-            {{ form_row(form.titre) }}
-            {{ form_row(form.file_path) }}
-            <input type="submit" class="btn btn-primary my-2" value="Envoyer un post">
-            {{ form_end(form) }}
-            <style>
-                body > main > form {
-                    display: flex;
-                    flex-direction: column;
-                    width: 50vh;
-                    background-color: lightgray;
-                    margin: 0 auto;
-                    padding: 15px;
-                    border-radius: 18px;
-                    margin-bottom: 25px;
-                }
-                body > main > form > *  {
-                    margin-bottom: 13px;
-                }
-            </style>
-        {% endif %}
-        <div class="container-fluid mb-5">
-            <div class="row">
-                <div class="card-columns">
-                    {% for post in posts %}
-                        <div class="card card-pin">
-                            <img class="card-img" src="../{{ post.filePath }}" alt="Card image">
-                            <div class="overlay">
-                                <h2 class="card-title title">{{ post.titre }}</h2>
-                                <div class="more">
-                                    <a href="../post/{{ post.token }}">
-                                        <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Plus </a>
+                <div class="content-column w-col w-col-9">
+                    <div class="white-wrapper mb"><img alt="" src="../{{ artiste.avatarUrl }}" class="circle-profile">
+                        <h1 class="font-weight-bold title">{{ formattedFirstname }} {{ abbreviatedLastname }}</h1>
+                        <p class="site-description">{{ artiste.biographie }}</p>
+                        <div class="grey-rule"></div>
+                        <div class="social-link-group">
+                            <a href="#" class="social-icon-link w-inline-block"><img width="25" src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed39811ff2c6_social-03.svg" alt=""></a>
+                            <a href="#" class="social-icon-link w-inline-block"><img width="25" src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed1ad11ff2da_social-07.svg" alt=""></a>
+                            <a href="#" class="social-icon-link w-inline-block"><img width="25" src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed1f5b1ff2bf_social-18.svg" alt=""></a>
+                            <a href="#" class="social-icon-link w-inline-block"><img width="25" src="https://uploads-ssl.webflow.com/5e4b1a54e48aed761d1ff229/5e4b1a54e48aed7e751ff288_social-09.svg" alt=""></a>
+                        </div>
+                    </div>
+                    <h1 class="white-bg-heading">Toutes les Créations</h1>
+                    {% if app.user %}
+                        {% if app.user.id == artiste.id %}
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
                                 </div>
+                            {% endfor %}
+                            {{ form_start(form) }}
+                            {{ form_row(form.titre) }}
+                            {{ form_row(form.file_path) }}
+                            <input type="submit" class="btn btn-primary my-2" value="Envoyer un post">
+                            {{ form_end(form) }}
+                            <style>
+                                body > main > form {
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 50vh;
+                                    background-color: lightgray;
+                                    margin: 0 auto;
+                                    padding: 15px;
+                                    border-radius: 18px;
+                                    margin-bottom: 25px;
+                                }
+                                body > main > form > *  {
+                                    margin-bottom: 13px;
+                                }
+                            </style>
+                        {% endif %}
+                    {% endif %}
+                    <div class="w-dyn-list">
+                        <div role="list" class="w-dyn-items">
+                            <div role="listitem" class="w-dyn-item">
+
+                                <div class="pswp-gallery pswp-gallery--single-column" id="gallery--getting-started">
+                                    <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"
+                                       data-pswp-width="1669"
+                                       data-pswp-height="2500"
+                                       target="_blank">
+                                        <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt="" style="width: 17vw;" />
+                                    </a>
+                                    <!-- cropped thumbnail: -->
+                                    <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg"
+                                       data-pswp-width="1875"
+                                       data-pswp-height="2500"
+                                       data-cropped="true"
+                                       target="_blank">
+                                        <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt="" style="width: 17vw;"/>
+                                    </a>
+                                    <!-- data-pswp-src with custom URL in href -->
+                                    <a href="https://unsplash.com"
+                                       data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"
+                                       data-pswp-width="2500"
+                                       data-pswp-height="1666"
+                                       target="_blank">
+                                        <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" alt="" style="width: 17vw;"/>
+                                    </a>
+                                    <!-- Without thumbnail: -->
+                                    <a href="http://example.com"
+                                       data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg"
+                                       data-pswp-width="2500"
+                                       data-pswp-height="1668"
+                                       target="_blank" style="width: 17vw;">
+                                    </a>
+                                    <!-- wrapped with any element: -->
+                                    <div>
+                                        <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg"
+                                           data-pswp-width="2500"
+                                           data-pswp-height="1667"
+                                           target="_blank">
+                                            <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg" alt="" style="width: 17vw;" />
+                                        </a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
+                    <div class="sidebar-on-mobile"></div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <script type="module">
+        // Include Lightbox
+        import PhotoSwipeLightbox from '../assets/js/lightbox/photoswipe-lightbox.esm.js';
+
+        const lightbox = new PhotoSwipeLightbox({
+            // may select multiple "galleries"
+            gallery: '#gallery--getting-started',
+
+            // Elements within gallery (slides)
+            children: 'a',
+
+            // setup PhotoSwipe Core dynamic import
+            pswpModule: () => import('../assets/js/photoswipe.esm.js')
+        });
+        lightbox.init();
+    </script>
+
+
 {% endblock %}

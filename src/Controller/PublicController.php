@@ -34,6 +34,7 @@ class PublicController extends AbstractController
         $users = $entityManager->createQueryBuilder()
             ->select('u.token', 'u.firstname', 'u.lastname', 'u.avatarUrl')
             ->from(User::class, 'u')
+            ->where('u.showProfile = 1')
             ->orderBy('u.id', 'DESC') // Order by the latest users
             ->setMaxResults(5) // Limit to 5 users
             ->getQuery()
@@ -44,6 +45,27 @@ class PublicController extends AbstractController
             'posts' => $posts,
             'users' => $users,
         ]);
+    }
+
+    #[\Symfony\Component\Routing\Annotation\Route('/creations', name: 'app_creations')]
+    public function creations(EntityManagerInterface $entityManager): Response
+    {
+        // Render the home page with the posts and users
+        return $this->render('public/creations.html.twig');
+    }
+
+    #[\Symfony\Component\Routing\Annotation\Route('/artistes', name: 'app_artistes')]
+    public function artistes(EntityManagerInterface $entityManager): Response
+    {
+        // Render the home page with the posts and users
+        return $this->render('public/artistes.html.twig');
+    }
+
+    #[\Symfony\Component\Routing\Annotation\Route('/error', name: 'app_error')]
+    public function error(EntityManagerInterface $entityManager): Response
+    {
+        // Render the home page with the posts and users
+        return $this->render('public/error.html.twig');
     }
 
 
@@ -133,6 +155,7 @@ class PublicController extends AbstractController
             ->select('u.id, u.firstname, u.lastname, u.biographie, u.avatarUrl')
             ->from(User::class, 'u')
             ->where('u.token = :token')
+            ->andwhere('u.showProfile = 1')
             ->setParameter('token', $token)
             ->getQuery()
             ->getOneOrNullResult();

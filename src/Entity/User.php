@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $token = null;
 
+    #[ORM\Column]
+    private ?bool $showProfile = null;
+
     // Getters and Setters
 
     public function getId(): ?int
@@ -179,6 +182,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = array_filter($this->roles, function ($existingRole) use ($role) {
             return $existingRole !== $role;
         });
+        return $this;
+    }
+
+    public function isShowProfile(): ?bool
+    {
+        return $this->showProfile;
+    }
+
+    public function setShowProfile(bool $showProfile): static
+    {
+        $this->showProfile = $showProfile;
+
         return $this;
     }
 }

@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block title %}Artiste{% endblock %}
+
+{% block content %}
+    <section class="hero-without-image-2"></section>
+    <section class="section-4">
+        <div>
+            <h1 class="heading-5">News : Artistes</h1>
+            <div class="w-layout-grid grid-2">
+                {% for i in 0..3 %}
+                <a href="/profile/8bc8606d-7bf1-4960-8ea8-6301cbfd6114">
+                    <div class="div-block-11"><img src="../assets/images/artiste{{ i }}.png" loading="lazy" alt="" class="image-3">
+                        <div class="text-block-3">Yūki Kaji</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="div-block-12">
+            <h1 class="heading-6">Artistes</h1>
+            <div class="w-layout-grid grid-3">
+                {% for i in 0..3 %}
+                <a href="/profile/8bc8606d-7bf1-4960-8ea8-6301cbfd6114">
+                    <div id="w-node-c26cb70a-7335-364f-52a2-a818647f8673-5ed0f8f6" class="div-block-11"><img src="../assets/images/artiste{{ i }}.png" loading="lazy" alt="" class="image-3">
+                        <div class="text-block-3">Yūki Kaji</div>
+                    </div>
+                </a>
+                {% endfor %}
+
+                {% for i in 0..3 %}
+                <a href="/profile/8bc8606d-7bf1-4960-8ea8-6301cbfd6114">
+                    <div id="w-node-c26cb70a-7335-364f-52a2-a818647f8673-5ed0f8f6" class="div-block-11"><img src="../assets/images/artiste{{ i }}.png" loading="lazy" alt="" class="image-3">
+                        <div class="text-block-3">Yūki Kaji</div>
+                    </div>
+                </a>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

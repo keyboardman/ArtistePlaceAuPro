@@ -7,125 +7,41 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <main role="main">
-        <section class="mt-4 mb-5">
-            <div class="container mb-4">
-                <h1 class="font-weight-bold title">Explorer</h1>
-                <!--<div class="row">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white pl-2 pr-2">
-                        <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarsExplore">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Lifestyle</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Food</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Travel</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
-                                    <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
-                                        <a class="dropdown-item" href="#">Astronomy</a>
-                                        <a class="dropdown-item" href="#">Nature</a>
-                                        <a class="dropdown-item" href="#">Cooking</a>
-                                        <a class="dropdown-item" href="#">Fashion</a>
-                                        <a class="dropdown-item" href="#">Wellness</a>
-                                        <a class="dropdown-item" href="#">Dieting</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>-->
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="card-columns">
-                        {% for post in posts %}
-                            <div class="card card-pin">
-                                <img class="card-img" src="{{ asset(post.filePath) }}" alt="Card image">
-                                <div class="overlay">
-                                    <h2 class="card-title title">{{ post.titre }}</h2>
-                                    <div class="more">
-                                        <a href="{{ path('app_post', {token: post.token}) }}">
-                                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Plus </a>
-                                    </div>
-                                </div>
+    <section class="hero-without-image">
+        <div class="container">
+            <div class="hero-wrapper-two"><img src="../assets/images/Hero-text.svg" loading="lazy" width="656" alt="" class="image"></div>
+        </div>
+    </section>
+    <section class="section-3">
+        <div class="main">
+            <div class="artistedumoment">
+                <h1 class="heading-3">Artistes Du Moment</h1>
+                <div class="w-layout-grid grid">
+                    {% for user in users %}
+                        {% set formattedFirstname = user.firstname|lower|capitalize %}
+                        {% set formattedLastname = user.lastname|lower %}
+                        {% set abbreviatedLastname = formattedLastname|slice(0, 1) ~ '.' %}
+                        <a href="/profile/{{ user.token }}">
+                            <div id="w-node-_44f5fca2-fbee-a87b-4e62-f902ac4b0864-5ed0f8f5" class="div-block-4">
+                                <img src="../{{ user.avatarUrl }}" loading="lazy" id="w-node-bd8f7e90-ab8d-7bac-3f8d-5bb7f4493443-5ed0f8f5" alt="" class="image-2">
+                                <div class="text-block">{{ formattedFirstname }} {{ abbreviatedLastname }}</div>
                             </div>
-                        {% endfor %}
+                        </a>
+                    {% endfor %}
                     </div>
                 </div>
             </div>
-        </section>
-        <hr>
-        <section class="mt-4 mb-5">
-            <div class="container mb-4">
-                <h1 class="font-weight-bold title">Artiste du moment</h1>
-                <!--<div class="row">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white pl-2 pr-2">
-                        <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarsExplore">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Lifestyle</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Food</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Travel</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
-                                    <div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
-                                        <a class="dropdown-item" href="#">Astronomy</a>
-                                        <a class="dropdown-item" href="#">Nature</a>
-                                        <a class="dropdown-item" href="#">Cooking</a>
-                                        <a class="dropdown-item" href="#">Fashion</a>
-                                        <a class="dropdown-item" href="#">Wellness</a>
-                                        <a class="dropdown-item" href="#">Dieting</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>-->
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="card-columns">
-                        {% for user in users %}
-                            {% set formattedFirstname = user.firstname|lower|capitalize %}
-                            {% set formattedLastname = user.lastname|lower %}
-                            {% set abbreviatedLastname = formattedLastname|slice(0, 1) ~ '.' %}
-
-                            <div class="card card-pin">
-                                <img class="card-img" src="../{{ user.avatarUrl }}" alt="Card image">
-                                <div class="overlay">
-                                    <h2 class="card-title title">{{ formattedFirstname }} {{ abbreviatedLastname }}</h2>
-                                    <div class="more">
-                                        <a href="/profile/{{ user.token }}">
-                                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Plus </a>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
+            <div class="div-block"></div>
+            <div class="artistedumoment">
+                <h1 class="heading-3">Dernière Création</h1>
+                <div class="w-layout-grid grid">
+                    {% for i in 0..4 %}
+                        <a href="#">
+                            <div id="w-node-ab875b5e-6bde-c7ad-b470-64899234d789-5ed0f8f5" class="div-block-4"><img src="../assets/images/creation{{ i }}.png" loading="lazy" id="w-node-ab875b5e-6bde-c7ad-b470-64899234d78a-5ed0f8f5" alt="" class="image-2"></div>
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 {% endblock %}
